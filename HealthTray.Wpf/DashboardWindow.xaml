@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HealthTray"
         mc:Ignorable="d"
-        Title="Dashboard" Icon="icons/down.ico"
+        Title="Dashboard" Icon="icons/new.ico"
         Width="640" Height="480"
         MinWidth="320" MinHeight="320"
         Background="#282828">
