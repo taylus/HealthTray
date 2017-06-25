@@ -2,7 +2,7 @@
 using System.Windows;
 using System.Windows.Input;
 
-namespace HealthTray
+namespace HealthTray.Wpf
 {
     public class ShowDashboardCommand : ICommand
     {

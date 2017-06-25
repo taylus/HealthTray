@@ -1,7 +1,7 @@
 ﻿using System.Windows;
 using Hardcodet.Wpf.TaskbarNotification;
 
-namespace HealthTray
+namespace HealthTray.Wpf
 {
     public partial class App : Application
     {

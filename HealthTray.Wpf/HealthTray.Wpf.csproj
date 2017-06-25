@@ -7,7 +7,7 @@
     <ProjectGuid>{40630A76-BD59-4CC8-BB9A-ACF496382A7E}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>HealthTray</RootNamespace>
+    <RootNamespace>HealthTray.Wpf</RootNamespace>
     <AssemblyName>HealthTray</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -59,7 +59,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="CheckControl.xaml.cs">
+      <DependentUpon>CheckControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ShowDashboardCommand.cs" />
+    <Page Include="CheckControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="DashboardWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
