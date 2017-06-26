@@ -7,9 +7,9 @@
         mc:Ignorable="d"
         Title="HealthTray Dashboard" Icon="icons/up.ico"
         Width="640" Height="480"
-        MinWidth="320" MinHeight="320"
+        MinWidth="280" MinHeight="320"
         Background="#282828">
-    <WrapPanel Name="CheckPanel" Height="Auto" Width="Auto" Margin="8">
+    <WrapPanel Name="CheckPanel" Height="Auto" Width="Auto">
 
     </WrapPanel>
 </Window>
