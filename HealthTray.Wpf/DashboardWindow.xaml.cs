@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Input;
 using System.ComponentModel;
 
 namespace HealthTray.Wpf
@@ -8,10 +9,17 @@ namespace HealthTray.Wpf
         public DashboardWindow()
         {
             InitializeComponent();
+            PreviewKeyDown += new KeyEventHandler(CloseOnEsc);
+
             for(int i = 0; i < 4; i++)
             {
                 CheckPanel.Children.Add(new CheckControl());
             }
+        }
+
+        private void CloseOnEsc(object sender, KeyEventArgs e)
+        {
+            if(e.Key == Key.Escape) Close();
         }
 
         //minimize to system tray when closed
