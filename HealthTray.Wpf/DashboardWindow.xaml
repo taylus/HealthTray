@@ -9,7 +9,7 @@
         Width="640" Height="480"
         MinWidth="320" MinHeight="320"
         Background="#282828">
-    <WrapPanel Name="CheckPanel" Height="Auto" Width="Auto" Margin="0,5">
-        
+    <WrapPanel Name="CheckPanel" Height="Auto" Width="Auto" Margin="8">
+
     </WrapPanel>
 </Window>
