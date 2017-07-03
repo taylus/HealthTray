@@ -4,7 +4,7 @@ using HealthTray.Service.Model;
 
 namespace HealthTray.Service
 {
-    interface IHealthTrayService
+    public interface IHealthTrayService
     {
         Task<IList<Check>> GetChecks();
         //void CreateCheck(string checkData);

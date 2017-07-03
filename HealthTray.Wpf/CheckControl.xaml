@@ -5,8 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:HealthTray.Wpf"
              mc:Ignorable="d" 
-             d:DesignHeight="70" d:DesignWidth="280"
-             Height="84" Width="280">
+             Height="84" Width="312">
     <Border BorderBrush="Gray" BorderThickness="0,0,0,1" Padding="8" Margin="0,0,8,0">
         <Border.Style>
             <Style TargetType="Border">
@@ -21,9 +20,9 @@
             </Style>
         </Border.Style>
         <Grid>
-            <Image x:Name="checkStatus" HorizontalAlignment="Left" Width="28"  Height="28" VerticalAlignment="Top" Source="icons/up.ico" Margin="4,8,0,0"/>
-            <Label x:Name="checkName" Content="Check Name" HorizontalAlignment="Left" Margin="38,4,0,0" Padding="2" VerticalAlignment="Top" Width="200" Height="30" FontSize="24" FontFamily="Calibri" Foreground="White"/>
-            <Label x:Name="checkLastPing" Content="Last Ping: 30 seconds ago" HorizontalAlignment="Left" Margin="38,39,0,-8" Padding="2" Width="200" FontSize="18" FontFamily="Calibri" Foreground="White"/>
+            <Image x:Name="checkStatus" HorizontalAlignment="Left" Width="28"  Height="28" VerticalAlignment="Top" Source="icons/new.ico" Margin="4,8,0,0"/>
+            <Label x:Name="checkName" Content="Check Name" HorizontalAlignment="Left" Margin="38,4,0,0" Padding="2" VerticalAlignment="Top" Width="250" Height="32" FontSize="24" FontFamily="Calibri" Foreground="White"/>
+            <Label x:Name="checkLastPing" Content="Last Ping: 30 seconds ago" HorizontalAlignment="Left" Margin="38,39,0,-8" Padding="2" Width="250" FontSize="18" FontFamily="Calibri" Foreground="White"/>
         </Grid>
     </Border>
 </UserControl>
