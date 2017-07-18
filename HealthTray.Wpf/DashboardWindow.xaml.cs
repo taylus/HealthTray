@@ -24,6 +24,7 @@ namespace HealthTray.Wpf
 
             InitializeComponent();
             PreviewKeyDown += new KeyEventHandler(CloseOnEsc);
+            PreviewKeyUp += new KeyEventHandler(RefreshOnF5);
         }
 
         /// <summary>
@@ -87,6 +88,14 @@ namespace HealthTray.Wpf
         private void CloseOnEsc(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Escape) Close();
+        }
+
+        /// <summary>
+        /// Keyboard handler: refreshes the window on pressing F5.
+        /// </summary>
+        private async void RefreshOnF5(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.F5) await Refresh();
         }
 
         /// <summary>
