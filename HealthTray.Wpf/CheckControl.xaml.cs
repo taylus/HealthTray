@@ -57,18 +57,15 @@ namespace HealthTray.Wpf
         /// Returns a human-readable string of the given TimeSpan with one second precision.
         /// </summary>
         /// <remarks>
-        /// Remove the "else"s to make the display more specific ("1 minute 20 seconds" vs "1 minute").
-        /// </remarks>
-        /// <remarks>
         /// TODO: unit test
         /// </remarks>
         private static string FormatForDisplay(TimeSpan t)
         {
             var sb = new StringBuilder();
-            if(t.Days >= 1) sb.AppendFormat("{0} day{1} ", t.Days, t.Days > 1 ? "s" : "");
-            else if (t.Hours >= 1) sb.AppendFormat("{0} hour{1} ", t.Hours, t.Hours > 1 ? "s" : "");
-            else if (t.Minutes >= 1) sb.AppendFormat("{0} minute{1} ", t.Minutes, t.Minutes > 1 ? "s" : "");
-            else if (t.Seconds >= 1) sb.AppendFormat("{0} second{1} ", t.Seconds, t.Seconds > 1 ? "s" : "");
+            if (t.Days >= 1) sb.AppendFormat("{0}d ", t.Days);
+            if (t.Hours >= 1) sb.AppendFormat("{0}h ", t.Hours);
+            if (t.Minutes >= 1) sb.AppendFormat("{0}m ", t.Minutes);
+            if (t.Seconds >= 1) sb.AppendFormat("{0}s ", t.Seconds);
 
             string display = sb.ToString();
             return string.IsNullOrWhiteSpace(display) ? "just now" : display + "ago";
