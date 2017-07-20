@@ -1,0 +1,38 @@
+﻿<UserControl x:Class="HealthTray.Wpf.SettingsControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:HealthTray.Wpf"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300"
+             Background="#282828">
+    <Grid>
+        <Grid Name="Form" Margin="8">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Label Foreground="White" Margin="8">API URL:</Label>
+            <TextBox Grid.Column="1" Margin="8"></TextBox>
+            <Label Grid.Row="1" Foreground="White" Margin="8">API Key:</Label>
+            <TextBox Grid.Row="1" Grid.Column="1" Margin="8"></TextBox>
+            <Label Grid.Row="2" Grid.ColumnSpan="2" Foreground="White" Margin="8">
+                <Hyperlink NavigateUri="https://healthchecks.io/docs/api/" RequestNavigate="Hyperlink_RequestNavigate">How do I get my API key?</Hyperlink>
+            </Label>
+        </Grid>
+        <Grid Name="Buttons" VerticalAlignment="Bottom" HorizontalAlignment="Right">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Button Padding="16 8" Command="{StaticResource ShowDashboardCommand}">Save</Button>
+            <Button Padding="16 8" Grid.Column="1" Command="{StaticResource ShowDashboardCommand}">Cancel</Button>
+        </Grid>
+    </Grid>
+</UserControl>

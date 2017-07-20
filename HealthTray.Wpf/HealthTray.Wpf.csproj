@@ -63,6 +63,7 @@
       <DependentUpon>CheckControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Commands\RefreshDashboardCommand.cs" />
+    <Compile Include="Commands\ShowSettingsCommand.cs" />
     <Compile Include="Commands\ShowDashboardCommand.cs" />
     <Compile Include="Commands\ExitCommand.cs" />
     <Page Include="CheckControl.xaml">
@@ -81,8 +82,15 @@
       <DependentUpon>DashboardWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="SettingsControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="SettingsControl.xaml.cs">
+      <DependentUpon>SettingsControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Testing\StubHealthTrayService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

@@ -4,7 +4,7 @@ using System.Windows.Input;
 
 namespace HealthTray.Wpf
 {
-    public class ShowDashboardCommand : ICommand
+    public class ShowSettingsCommand : ICommand
     {
         public event EventHandler CanExecuteChanged { add { } remove { } }
 
@@ -13,8 +13,8 @@ namespace HealthTray.Wpf
             var dashboard = Application.Current.MainWindow as DashboardWindow;
             if (dashboard != null)
             {
-                dashboard.Settings.Visibility = Visibility.Collapsed;
-                dashboard.CheckPanel.Visibility = Visibility.Visible;
+                dashboard.Settings.Visibility = Visibility.Visible;
+                dashboard.CheckPanel.Visibility = Visibility.Collapsed;
                 dashboard.Show();
                 dashboard.Focus();
             }

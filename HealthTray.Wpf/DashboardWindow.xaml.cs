@@ -73,6 +73,9 @@ namespace HealthTray.Wpf
         /// Determine the overall status of the dashboard based on the given checks.
         /// E.g. it's up if everything is up, but down if anything is down, etc.
         /// </summary>
+        /// <remarks>
+        /// TODO: extract + unit test
+        /// </remarks>
         private CheckStatus DetermineOverallStatus(IList<Check> checks)
         {
             if (checks.All(c => c.status == CheckStatus.up)) return CheckStatus.up;

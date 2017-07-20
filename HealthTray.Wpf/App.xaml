@@ -5,6 +5,7 @@
              xmlns:tb="http://www.hardcodet.net/taskbar">
     <Application.Resources>
 
+        <local:ShowSettingsCommand x:Key="ShowSettingsCommand"/>
         <local:ShowDashboardCommand x:Key="ShowDashboardCommand"/>
         <local:RefreshDashboardCommand x:Key="RefreshDashboardCommand" />
         <local:ExitCommand x:Key="ExitCommand" />
@@ -15,6 +16,8 @@
                 <ContextMenu>
                     <MenuItem Header="Open Dashboard" Command="{StaticResource ShowDashboardCommand}"/>
                     <MenuItem Header="Refresh" Command="{StaticResource RefreshDashboardCommand}"/>
+                    <Separator/>
+                    <MenuItem Header="Settings" Command="{StaticResource ShowSettingsCommand}"/>
                     <Separator/>
                     <MenuItem Header="Exit" Command="{StaticResource ExitCommand}"/>
                 </ContextMenu>

@@ -16,9 +16,10 @@
                 <MenuItem Header="_Refresh" InputGestureText="F5" Command="{StaticResource RefreshDashboardCommand}"/>
                 <MenuItem Header="E_xit" Command="{StaticResource ExitCommand}"/>
             </MenuItem>
-            <MenuItem Header="_Settings"/>
+            <MenuItem Header="_Settings" Command="{StaticResource ShowSettingsCommand}"/>
         </Menu>
         <WrapPanel Name="CheckPanel" Height="Auto" Width="Auto">
         </WrapPanel>
+        <local:SettingsControl x:Name="Settings" Visibility="Collapsed"/>
     </DockPanel>
 </Window>
