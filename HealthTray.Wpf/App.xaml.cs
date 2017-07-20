@@ -20,22 +20,6 @@ namespace HealthTray.Wpf
             dashboard.Show();
         }
 
-        private void TaskbarIcon_Menu_OpenDashboard_Click(object sender, RoutedEventArgs e)
-        {
-            Current.MainWindow.Show();
-        }
-
-        private async void TaskbarIcon_Menu_RefreshDashboard_Click(object sender, RoutedEventArgs e)
-        {
-            var dashboard = Current.MainWindow as DashboardWindow;
-            if (dashboard != null) await dashboard.Refresh();
-        }
-
-        private void TaskbarIcon_Menu_Exit_Click(object sender, RoutedEventArgs e)
-        {
-            Current.Shutdown();
-        }
-
         public void SetTaskbarIcon(ImageSource icon)
         {
             tb.IconSource = icon;

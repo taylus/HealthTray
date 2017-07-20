@@ -6,11 +6,13 @@ namespace HealthTray.Wpf
 {
     public class ShowDashboardCommand : ICommand
     {
-        public event EventHandler CanExecuteChanged { add { throw new NotSupportedException(); } remove { } }
+        public event EventHandler CanExecuteChanged { add { } remove { } }
 
         public void Execute(object parameter)
         {
-            Application.Current.MainWindow.Show();
+            var window = Application.Current.MainWindow;
+            window.Show();
+            window.Focus();
         }
 
         public bool CanExecute(object parameter)

@@ -62,7 +62,9 @@
     <Compile Include="CheckControl.xaml.cs">
       <DependentUpon>CheckControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ShowDashboardCommand.cs" />
+    <Compile Include="Commands\RefreshDashboardCommand.cs" />
+    <Compile Include="Commands\ShowDashboardCommand.cs" />
+    <Compile Include="Commands\ExitCommand.cs" />
     <Page Include="CheckControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

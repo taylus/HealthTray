@@ -9,7 +9,16 @@
         Width="640" Height="480"
         MinWidth="320" MinHeight="320"
         Background="#282828">
-    <WrapPanel Name="CheckPanel" Height="Auto" Width="Auto">
-
-    </WrapPanel>
+    <DockPanel>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="_Dashboard">
+                <MenuItem Header="_Show" Command="{StaticResource ShowDashboardCommand}"/>
+                <MenuItem Header="_Refresh" InputGestureText="F5" Command="{StaticResource RefreshDashboardCommand}"/>
+                <MenuItem Header="E_xit" Command="{StaticResource ExitCommand}"/>
+            </MenuItem>
+            <MenuItem Header="_Settings"/>
+        </Menu>
+        <WrapPanel Name="CheckPanel" Height="Auto" Width="Auto">
+        </WrapPanel>
+    </DockPanel>
 </Window>
