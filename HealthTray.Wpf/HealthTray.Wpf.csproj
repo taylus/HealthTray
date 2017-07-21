@@ -132,6 +132,10 @@
     <Resource Include="Icons\paused.ico" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\HealthTray.Security\HealthTray.Security.csproj">
+      <Project>{e95408b4-89b0-447e-9ce3-1bc94125ed58}</Project>
+      <Name>HealthTray.Security</Name>
+    </ProjectReference>
     <ProjectReference Include="..\HealthTray.Service\HealthTray.Service.csproj">
       <Project>{7bcb9b17-8cb7-45ad-bf49-d89b233a6b19}</Project>
       <Name>HealthTray.Service</Name>

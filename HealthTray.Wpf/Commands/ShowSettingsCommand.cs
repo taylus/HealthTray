@@ -15,6 +15,8 @@ namespace HealthTray.Wpf
             {
                 dashboard.Settings.Visibility = Visibility.Visible;
                 dashboard.CheckPanel.Visibility = Visibility.Collapsed;
+                dashboard.Settings.Clear();
+                dashboard.Settings.LoadFromConfig();
                 dashboard.Show();
                 dashboard.Focus();
             }

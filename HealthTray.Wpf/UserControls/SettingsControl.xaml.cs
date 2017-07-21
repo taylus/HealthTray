@@ -6,6 +6,8 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
 using System.Collections.Generic;
+using System.Security.Cryptography;
+using HealthTray.Security;
 
 namespace HealthTray.Wpf
 {
@@ -14,7 +16,6 @@ namespace HealthTray.Wpf
         public SettingsControl()
         {
             InitializeComponent();
-            LoadSettings();
         }
 
         private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
@@ -24,35 +25,64 @@ namespace HealthTray.Wpf
         }
 
         /// <summary>
+        /// Clears the settings form of all inputs.
+        /// </summary>
+        public void Clear()
+        {
+            apiUrl.Clear();
+            apiKey.Clear();
+            refreshSeconds.Clear();
+        }
+
+        /// <summary>
         /// Loads settings from App.config and populates the form.
         /// </summary>
-        private void LoadSettings()
+        public void LoadFromConfig()
         {
-            string apiDocsUrl = ConfigurationManager.AppSettings["healthchecks-api-docs"];
-            Uri apiDocsUri;
-            if (Uri.TryCreate(apiDocsUrl, UriKind.Absolute, out apiDocsUri))
+            try
             {
-                apiDocsLink.NavigateUri = apiDocsUri;
-            }
+                Configuration config = GetConfig();
+                string apiDocsUrl = config.AppSettings.Settings["healthchecks-api-docs"].Value;
+                Uri apiDocsUri;
+                if (Uri.TryCreate(apiDocsUrl, UriKind.Absolute, out apiDocsUri))
+                {
+                    apiDocsLink.NavigateUri = apiDocsUri;
+                }
 
-            apiUrl.Text = ConfigurationManager.AppSettings["healthchecks-api-url"];
-            apiKey.Text = ConfigurationManager.AppSettings["healthchecks-api-key"];
-            refreshSeconds.Text = ConfigurationManager.AppSettings["refresh-seconds"];
+                apiUrl.Text = config.AppSettings.Settings["healthchecks-api-url"].Value;
+                refreshSeconds.Text = config.AppSettings.Settings["refresh-seconds"].Value;
+
+                string salt = config.AppSettings.Settings["healthtray-salt"].Value;
+                apiKey.Text = Crypto.Decrypt(config.AppSettings.Settings["healthchecks-api-key"].Value, salt);
+            }
+            catch (Exception ex) when (ex is CryptographicException || ex is FormatException)
+            {
+                MessageBox.Show("Something went wrong decrypting your API key. :(\n\nPlease supply a new one.\n\nThe error was: "
+                    + ex.Message, "Error decrypting API key", MessageBoxButton.OK, MessageBoxImage.Error);
+                apiKey.Clear();
+                apiKey.Focus();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error loading settings", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         /// <summary>
         /// Saves settings in the form to App.config.
         /// </summary>
-        private void SaveSettings_Click(object sender, System.Windows.RoutedEventArgs e)
+        private void SaveSettings_Click(object sender, RoutedEventArgs e)
         {
             //TODO: validation
             //refresh seconds must be a positive integer # w/ some lower limit (30 seconds?)
 
             try
             {
-                var config = ConfigurationManager.OpenExeConfiguration(Assembly.GetExecutingAssembly().Location);
+                Configuration config = GetConfig();
+                string salt = Crypto.GenerateSalt(32);
+                SetAppSetting(config, "healthtray-salt", salt);
+                SetAppSetting(config, "healthchecks-api-key", Crypto.Encrypt(apiKey.Text, salt));
                 SetAppSetting(config, "healthchecks-api-url", apiUrl.Text);
-                SetAppSetting(config, "healthchecks-api-key", apiKey.Text);
                 SetAppSetting(config, "refresh-seconds", refreshSeconds.Text);
                 config.Save();
 
@@ -73,6 +103,14 @@ namespace HealthTray.Wpf
             var setting = config.AppSettings.Settings[key];
             if (setting == null) throw new KeyNotFoundException(string.Format("AppSetting \"{0}\" was not found in configuration.", key));
             setting.Value = value;
+        }
+
+        /// <summary>
+        /// Returns the configuration file for this application.
+        /// </summary>
+        private static Configuration GetConfig()
+        {
+            return ConfigurationManager.OpenExeConfiguration(Assembly.GetExecutingAssembly().Location);
         }
     }
 }
