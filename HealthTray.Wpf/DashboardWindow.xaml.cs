@@ -55,7 +55,7 @@ namespace HealthTray.Wpf
         {
             var timer = new DispatcherTimer();
             timer.Interval = TimeSpan.FromSeconds(seconds);
-            timer.Tick += async (sender, e) => { if (CheckPanel.IsVisible) await Refresh(); };
+            timer.Tick += async (sender, e) => await Refresh();
             return timer;
         }
 
