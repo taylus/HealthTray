@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Windows;
+using System.Windows.Media;
 using System.Windows.Controls;
 using System.Windows.Navigation;
 using System.Security.Cryptography;
@@ -83,8 +84,7 @@ namespace HealthTray.Wpf
         /// </summary>
         public void Save()
         {
-            //TODO: validation
-            //refresh seconds must be a positive integer # w/ some lower limit (30 seconds?)
+            if (!Validate()) return;
 
             try
             {
@@ -101,6 +101,26 @@ namespace HealthTray.Wpf
             {
                 MessageBox.Show(ex.Message, "Error saving settings", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+        }
+
+        /// <summary>
+        /// Validates the form for saving, returning false if it is invalid.
+        /// </summary>
+        /// <remarks>
+        /// TODO: Look into data binding + more sophisticated validation.
+        /// </remarks>
+        private bool Validate()
+        {
+            int refreshSecondsValue;
+            if (!int.TryParse(refreshSeconds.Text, out refreshSecondsValue))
+            {
+                MessageBox.Show("Refresh seconds must be an integer.", "Error saving settings", MessageBoxButton.OK, MessageBoxImage.Warning);
+                refreshSeconds.Focus();
+                refreshSeconds.SelectAll();
+                return false;
+            }
+
+            return true;
         }
     }
 }
