@@ -44,11 +44,11 @@ namespace HealthTray.Wpf
         public static ImageSource GetIconFor(CheckStatus status)
         {
             string icon;
-            if (status == CheckStatus.up) icon = "icons/up.ico";
-            else if (status == CheckStatus.down) icon = "icons/down.ico";
-            else if (status == CheckStatus.late) icon = "icons/late.ico";
-            else if (status == CheckStatus.@new) icon = "icons/new.ico";
-            else if (status == CheckStatus.paused) icon = "icons/paused.ico";
+            if (status == CheckStatus.up) icon = "Icons/up.ico";
+            else if (status == CheckStatus.down) icon = "Icons/down.ico";
+            else if (status == CheckStatus.late) icon = "Icons/late.ico";
+            else if (status == CheckStatus.@new) icon = "Icons/new.ico";
+            else if (status == CheckStatus.paused) icon = "Icons/paused.ico";
             else throw new ArgumentException("No icon exists for status: " + status, nameof(status));
             return new BitmapImage(new Uri("pack://application:,,,/HealthTray;component/" + icon));
         }

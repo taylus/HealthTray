@@ -121,15 +121,15 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="icons\down.ico" />
+    <Resource Include="Icons\down.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="icons\up.ico" />
+    <Resource Include="Icons\up.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="icons\late.ico" />
-    <Resource Include="icons\new.ico" />
-    <Resource Include="icons\paused.ico" />
+    <Resource Include="Icons\late.ico" />
+    <Resource Include="Icons\new.ico" />
+    <Resource Include="Icons\paused.ico" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\HealthTray.Service\HealthTray.Service.csproj">

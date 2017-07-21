@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HealthTray.Wpf"
         mc:Ignorable="d"
-        Title="HealthTray Dashboard" Icon="icons/new.ico"
+        Title="HealthTray Dashboard" Icon="Icons/new.ico"
         Width="640" Height="480"
         MinWidth="320" MinHeight="320"
         Background="#282828">

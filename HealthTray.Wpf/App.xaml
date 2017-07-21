@@ -11,7 +11,7 @@
         <local:ExitCommand x:Key="ExitCommand" />
 
         <!-- globally-declared system tray icon -->
-        <tb:TaskbarIcon x:Key="TaskbarIcon" IconSource="icons/new.ico" ToolTipText="HealthTray" DoubleClickCommand="{StaticResource ShowDashboardCommand}">
+        <tb:TaskbarIcon x:Key="TaskbarIcon" IconSource="Icons/new.ico" ToolTipText="HealthTray" DoubleClickCommand="{StaticResource ShowDashboardCommand}">
             <tb:TaskbarIcon.ContextMenu>
                 <ContextMenu>
                     <MenuItem Header="Open Dashboard" Command="{StaticResource ShowDashboardCommand}"/>
