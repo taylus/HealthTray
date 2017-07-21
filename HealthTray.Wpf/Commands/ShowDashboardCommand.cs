@@ -16,7 +16,7 @@ namespace HealthTray.Wpf
                 dashboard.Settings.Visibility = Visibility.Collapsed;
                 dashboard.CheckPanel.Visibility = Visibility.Visible;
                 dashboard.RefreshIntervalDisplay.Visibility = Visibility.Visible;
-                dashboard.UpdateRefreshIntervalDisplay();
+                dashboard.UpdateRefreshTimer();
                 dashboard.Show();
                 dashboard.Focus();
             }

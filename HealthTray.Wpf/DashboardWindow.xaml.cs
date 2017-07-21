@@ -3,6 +3,7 @@ using System.Linq;
 using System.Windows;
 using System.Net.Http;
 using System.Windows.Input;
+using System.Windows.Threading;
 using System.ComponentModel;
 using System.Threading.Tasks;
 using System.Collections.Generic;
@@ -17,6 +18,7 @@ namespace HealthTray.Wpf
 
         private IHealthTrayService service;
         private AppConfig config;
+        private DispatcherTimer refreshTimer;
 
         /// <summary>
         /// Settings page user control.
@@ -30,11 +32,16 @@ namespace HealthTray.Wpf
         {
             this.service = service;
             this.config = config;
+
+            int refreshTimerSeconds = config.Get<int>("refresh-seconds");
+            refreshTimer = ConfigureRefreshTimer(refreshTimerSeconds);
+            refreshTimer.Start();
+
             Settings = new SettingsControl(config);
             InitializeComponent();
             dockPanel.Children.Add(Settings);
+            UpdateRefreshTimerDisplay(refreshTimerSeconds);
 
-            UpdateRefreshIntervalDisplay();
             PreviewKeyDown += new KeyEventHandler(CloseOnEsc);
             PreviewKeyUp += new KeyEventHandler(RefreshOnF5);
             PreviewKeyUp += new KeyEventHandler(ShowDashboardOnF1);
@@ -42,12 +49,34 @@ namespace HealthTray.Wpf
         }
 
         /// <summary>
+        /// Initializes and returns a dashboard refresh timer which fires every N seconds.
+        /// </summary>
+        private DispatcherTimer ConfigureRefreshTimer(int seconds)
+        {
+            var timer = new DispatcherTimer();
+            timer.Interval = TimeSpan.FromSeconds(seconds);
+            timer.Tick += async (sender, e) => { if (CheckPanel.IsVisible) await Refresh(); };
+            return timer;
+        }
+
+        /// <summary>
+        /// Updates the dashboard refresh timer to fire every N seconds.
+        /// Reads the number of seconds from configuration if it is unspecified.
+        /// </summary>
+        public void UpdateRefreshTimer(int? seconds = null)
+        {
+            if (seconds == null) seconds = config.Get<int>("refresh-seconds");
+            refreshTimer.Interval = TimeSpan.FromSeconds(seconds.Value);
+            UpdateRefreshTimerDisplay(seconds.Value);
+        }
+
+        /// <summary>
         /// Updates the text displayed for how often the dashboard refreshes
         /// by reading it from configuration.
         /// </summary>
-        public void UpdateRefreshIntervalDisplay()
+        private void UpdateRefreshTimerDisplay(int seconds)
         {
-            RefreshIntervalDisplay.Content = string.Format(refreshIntervalFormat, config.Get<int>("refresh-seconds"));
+            RefreshIntervalDisplay.Content = string.Format(refreshIntervalFormat, seconds);
         }
 
         /// <summary>
@@ -121,7 +150,7 @@ namespace HealthTray.Wpf
         /// <summary>
         /// Keyboard handler: shows the dashboard on pressing F1.
         /// </summary>
-        private async void ShowDashboardOnF1(object sender, KeyEventArgs e)
+        private void ShowDashboardOnF1(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.F1) new ShowDashboardCommand().Execute(null);
         }
@@ -129,7 +158,7 @@ namespace HealthTray.Wpf
         /// <summary>
         /// Keyboard handler: shows settings on pressing F2.
         /// </summary>
-        private async void ShowSettingsOnF2(object sender, KeyEventArgs e)
+        private void ShowSettingsOnF2(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.F2) new ShowSettingsCommand().Execute(null);
         }
