@@ -36,7 +36,7 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Button Padding="16 8" Command="{StaticResource ShowDashboardCommand}">Save</Button>
+            <Button Padding="16 8" Click="SaveSettings_Click">Save</Button>
             <Button Padding="16 8" Grid.Column="1" Command="{StaticResource ShowDashboardCommand}">Cancel</Button>
         </Grid>
     </Grid>

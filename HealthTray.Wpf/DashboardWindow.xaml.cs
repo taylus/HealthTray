@@ -65,7 +65,7 @@ namespace HealthTray.Wpf
             }
             catch (HttpRequestException httpEx)
             {
-                var errorMsgBox = MessageBox.Show(httpEx.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(httpEx.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
