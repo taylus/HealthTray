@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Windows;
-using System.Windows.Media;
 using System.Windows.Controls;
 using System.Windows.Navigation;
 using System.Security.Cryptography;
+using HealthTray.Service;
 using HealthTray.Security;
 
 namespace HealthTray.Wpf
@@ -95,7 +95,11 @@ namespace HealthTray.Wpf
                 config.Set("refresh-seconds", refreshSeconds.Text);
                 config.Save();
 
+                var dashboard = Application.Current.MainWindow as DashboardWindow;
+                if (dashboard != null) dashboard.Service = new HealthTrayService(apiUrl.Text, apiKey.Text);
+
                 new ShowDashboardCommand().Execute(null);
+                new RefreshDashboardCommand().Execute(null);
             }
             catch (Exception ex)
             {

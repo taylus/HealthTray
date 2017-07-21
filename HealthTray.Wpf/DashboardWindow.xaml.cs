@@ -16,7 +16,6 @@ namespace HealthTray.Wpf
     {
         const string refreshIntervalFormat = "Updated every {0} seconds";
 
-        private IHealthTrayService service;
         private AppConfig config;
         private DispatcherTimer refreshTimer;
 
@@ -25,12 +24,14 @@ namespace HealthTray.Wpf
         /// </summary>
         public SettingsControl Settings { get; private set; }
 
+        public IHealthTrayService Service { get; set; }
+
         /// <summary>
         /// Creates a dashboard window using the given healthchecks service.
         /// </summary>
         public DashboardWindow(IHealthTrayService service, AppConfig config)
         {
-            this.service = service;
+            Service = service;
             this.config = config;
 
             int refreshTimerSeconds = config.Get<int>("refresh-seconds");
@@ -99,7 +100,7 @@ namespace HealthTray.Wpf
 
             try
             {
-                var checks = await service.GetChecks();
+                var checks = await Service.GetChecks();
                 foreach (var check in checks)
                 {
                     CheckPanel.Children.Add(new CheckControl(check));
@@ -124,6 +125,7 @@ namespace HealthTray.Wpf
         /// </remarks>
         private CheckStatus DetermineOverallStatus(IList<Check> checks)
         {
+            if (checks.Count == 0) return CheckStatus.@new;
             if (checks.All(c => c.status == CheckStatus.up)) return CheckStatus.up;
             if (checks.Any(c => c.status == CheckStatus.down)) return CheckStatus.down;
             if (checks.Any(c => c.status == CheckStatus.late)) return CheckStatus.late;

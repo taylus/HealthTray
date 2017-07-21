@@ -1,9 +1,9 @@
-﻿using System;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Media;
 using System.Collections.Generic;
 using Hardcodet.Wpf.TaskbarNotification;
 using HealthTray.Service;
+using HealthTray.Security;
 using HealthTray.Service.Model;
 
 namespace HealthTray.Wpf
@@ -17,35 +17,30 @@ namespace HealthTray.Wpf
             base.OnStartup(e);
             tb = (TaskbarIcon)FindResource("TaskbarIcon"); //taskbar icon stays in the system tray until disposed/application exits
 
-            //TODO: use real API, read API key and URL from config, and make a settings window for the user to specify them
-            //var service = new HealthTrayService("https://healthchecks.io/api/v1/", "");
-            var service = new StubHealthTrayService(new List<Check>
+            var config = new AppConfig();
+            var apiUrl = config.Get<string>("healthchecks-api-url");
+            var apiKeySalt = config.Get<string>("healthtray-salt");
+
+            IHealthTrayService service = null;
+            bool goToSettings = false;
+            if (string.IsNullOrWhiteSpace(apiUrl) || string.IsNullOrWhiteSpace(apiKeySalt))
             {
-                new Check()
+                service = new StubHealthTrayService(new List<Check>());
+                if (MessageBox.Show("It looks like you haven't set an API key yet. Enter one now?", "First run?", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
                 {
-                    name = "A test check",
-                    last_ping = DateTime.Now.AddMinutes(-1.5)
-                },
-                new Check()
-                {
-                    name = "Another test check",
-                    last_ping = DateTime.Now
-                },
-                new Check()
-                {
-                    name = "Yet another test check",
-                    last_ping = DateTime.Now.AddHours(-30.5),
-                    status = CheckStatus.late
-                },
-                new Check()
-                {
-                    name = "Oh no it's down",
-                    last_ping = DateTime.Now.AddDays(-10),
-                    status = CheckStatus.down
-                },
-            });
-            var dashboard = new DashboardWindow(service, new AppConfig());
+                    goToSettings = true;
+                }
+            }
+            else
+            {
+                var apiKey = Crypto.Decrypt(config.Get<string>("healthchecks-api-key"), apiKeySalt);
+                service = new HealthTrayService(apiUrl, apiKey);
+            }
+
+            var dashboard = new DashboardWindow(service, config);
             dashboard.Show();
+
+            if (goToSettings) new ShowSettingsCommand().Execute(null);
         }
 
         public void SetTaskbarIcon(ImageSource icon)
