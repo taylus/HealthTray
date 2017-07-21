@@ -21,14 +21,14 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <Label Foreground="White" Margin="8">API URL:</Label>
-            <TextBox Grid.Column="1" Margin="8" Grid.ColumnSpan="2"></TextBox>
+            <TextBox Name="apiUrl" Grid.Column="1" Margin="8" Grid.ColumnSpan="2"></TextBox>
             <Label Grid.Row="1" Foreground="White" Margin="8">API Key:</Label>
-            <TextBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Margin="8"></TextBox>
+            <TextBox Name="apiKey" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Margin="8"></TextBox>
             <Label Grid.Row="2" Grid.ColumnSpan="3" Foreground="White" Margin="8">
-                <Hyperlink NavigateUri="https://healthchecks.io/docs/api/" RequestNavigate="Hyperlink_RequestNavigate">(How do I get my API key?)</Hyperlink>
+                <Hyperlink Name="apiDocsLink" RequestNavigate="Hyperlink_RequestNavigate">(How do I get my API key?)</Hyperlink>
             </Label>
             <Label Grid.Row="3" Foreground="White" Margin="8">Refresh every</Label>
-            <TextBox Grid.Row="3" Grid.Column="1" Margin="8"></TextBox>
+            <TextBox Name="refreshSeconds" Grid.Row="3" Grid.Column="1" Margin="8"></TextBox>
             <Label Grid.Row="3" Grid.Column="2" Foreground="White" Margin="8">seconds</Label>
         </Grid>
         <Grid Name="Buttons" VerticalAlignment="Bottom" HorizontalAlignment="Right">
