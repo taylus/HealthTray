@@ -37,6 +37,8 @@ namespace HealthTray.Wpf
             UpdateRefreshIntervalDisplay();
             PreviewKeyDown += new KeyEventHandler(CloseOnEsc);
             PreviewKeyUp += new KeyEventHandler(RefreshOnF5);
+            PreviewKeyUp += new KeyEventHandler(ShowDashboardOnF1);
+            PreviewKeyUp += new KeyEventHandler(ShowSettingsOnF2);
         }
 
         /// <summary>
@@ -114,6 +116,22 @@ namespace HealthTray.Wpf
         private async void RefreshOnF5(object sender, KeyEventArgs e)
         {
             if (CheckPanel.IsVisible && e.Key == Key.F5) await Refresh();
+        }
+
+        /// <summary>
+        /// Keyboard handler: shows the dashboard on pressing F1.
+        /// </summary>
+        private async void ShowDashboardOnF1(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.F1) new ShowDashboardCommand().Execute(null);
+        }
+
+        /// <summary>
+        /// Keyboard handler: shows settings on pressing F2.
+        /// </summary>
+        private async void ShowSettingsOnF2(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.F2) new ShowSettingsCommand().Execute(null);
         }
 
         /// <summary>

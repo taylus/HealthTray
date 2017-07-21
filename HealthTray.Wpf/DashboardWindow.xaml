@@ -12,11 +12,11 @@
     <DockPanel Name="dockPanel">
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="_Dashboard">
-                <MenuItem Header="_Show" Command="{StaticResource ShowDashboardCommand}"/>
+                <MenuItem Header="_Show" InputGestureText="F1" Command="{StaticResource ShowDashboardCommand}"/>
                 <MenuItem Header="_Refresh" InputGestureText="F5" Command="{StaticResource RefreshDashboardCommand}"/>
                 <MenuItem Header="E_xit" Command="{StaticResource ExitCommand}"/>
             </MenuItem>
-            <MenuItem Header="_Settings" Command="{StaticResource ShowSettingsCommand}"/>
+            <MenuItem Header="_Settings" InputGestureText="F2" Command="{StaticResource ShowSettingsCommand}"/>
         </Menu>
         <Label Name="RefreshIntervalDisplay" Foreground="LightGray" DockPanel.Dock="Bottom" HorizontalAlignment="Center">Updated every xxx seconds</Label>
         <WrapPanel Name="CheckPanel" Height="Auto" Width="Auto">
