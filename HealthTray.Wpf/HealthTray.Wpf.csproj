@@ -60,6 +60,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AppConfig.cs" />
     <Compile Include="UserControls\CheckControl.xaml.cs">
       <DependentUpon>CheckControl.xaml</DependentUpon>
     </Compile>

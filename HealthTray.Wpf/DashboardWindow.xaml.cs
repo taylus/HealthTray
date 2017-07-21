@@ -13,18 +13,39 @@ namespace HealthTray.Wpf
 {
     public partial class DashboardWindow : Window
     {
+        const string refreshIntervalFormat = "Updated every {0} seconds";
+
         private IHealthTrayService service;
+        private AppConfig config;
+
+        /// <summary>
+        /// Settings page user control.
+        /// </summary>
+        public SettingsControl Settings { get; private set; }
 
         /// <summary>
         /// Creates a dashboard window using the given healthchecks service.
         /// </summary>
-        public DashboardWindow(IHealthTrayService service)
+        public DashboardWindow(IHealthTrayService service, AppConfig config)
         {
             this.service = service;
-
+            this.config = config;
+            Settings = new SettingsControl(config);
             InitializeComponent();
+            dockPanel.Children.Add(Settings);
+
+            UpdateRefreshIntervalDisplay();
             PreviewKeyDown += new KeyEventHandler(CloseOnEsc);
             PreviewKeyUp += new KeyEventHandler(RefreshOnF5);
+        }
+
+        /// <summary>
+        /// Updates the text displayed for how often the dashboard refreshes
+        /// by reading it from configuration.
+        /// </summary>
+        public void UpdateRefreshIntervalDisplay()
+        {
+            RefreshIntervalDisplay.Content = string.Format(refreshIntervalFormat, config.Get<int>("refresh-seconds"));
         }
 
         /// <summary>
@@ -33,14 +54,8 @@ namespace HealthTray.Wpf
         protected async override void OnInitialized(EventArgs e)
         {
             base.OnInitialized(e);
+            Settings.Visibility = Visibility.Collapsed;
             await Refresh();
-
-            /*
-            for (int i = 0; i < 4; i++)
-            {
-                CheckPanel.Children.Add(new CheckControl());
-            }
-            */
         }
 
         /// <summary>
@@ -98,7 +113,7 @@ namespace HealthTray.Wpf
         /// </summary>
         private async void RefreshOnF5(object sender, KeyEventArgs e)
         {
-            if (e.Key == Key.F5) await Refresh();
+            if (CheckPanel.IsVisible && e.Key == Key.F5) await Refresh();
         }
 
         /// <summary>

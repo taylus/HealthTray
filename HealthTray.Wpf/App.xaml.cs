@@ -44,7 +44,7 @@ namespace HealthTray.Wpf
                     status = CheckStatus.down
                 },
             });
-            var dashboard = new DashboardWindow(service);
+            var dashboard = new DashboardWindow(service, new AppConfig());
             dashboard.Show();
         }
 
