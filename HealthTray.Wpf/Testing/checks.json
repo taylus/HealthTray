@@ -1,0 +1,28 @@
+{
+  "checks": [
+    {
+      "name": "Check that is up",
+      "status": "up",
+      "last_ping": "2017-07-24T19:30:00.000000+00:00"
+    },
+    {
+      "name": "Check that is new",
+      "status": "new"
+    },
+    {
+      "name": "Check that is late",
+      "status": "late",
+      "last_ping": "2017-07-22T00:00:00.000000+00:00"
+    },
+    {
+      "name": "Check that is down",
+      "status": "down",
+      "last_ping": "2017-07-18T00:00:00.000000+00:00"
+    },
+    {
+      "name": "Check that is paused",
+      "status": "paused",
+      "last_ping": "2017-07-24T00:00:00.000000+00:00"
+    }
+  ]
+}

@@ -54,20 +54,23 @@ namespace HealthTray.Wpf
         }
 
         /// <summary>
-        /// Returns a human-readable string of the given TimeSpan with one second precision.
+        /// Returns a human-readable version of the given "check last pinged" TimeSpan.
         /// </summary>
         /// <remarks>
         /// TODO: unit test
         /// </remarks>
-        private static string FormatForDisplay(TimeSpan t)
+        private static string FormatForDisplay(TimeSpan? ts)
         {
+            if (ts == null) return "never";
+
+            var t = ts.Value;
             var sb = new StringBuilder();
             if (t.Days >= 1) sb.AppendFormat("{0}d ", t.Days);
             if (t.Hours >= 1) sb.AppendFormat("{0}h ", t.Hours);
             if (t.Minutes >= 1) sb.AppendFormat("{0}m ", t.Minutes);
             if (t.Seconds >= 1) sb.AppendFormat("{0}s ", t.Seconds);
-
             string display = sb.ToString();
+
             return string.IsNullOrWhiteSpace(display) ? "just now" : display + "ago";
         }
     }

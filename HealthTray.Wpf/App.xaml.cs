@@ -39,32 +39,7 @@ namespace HealthTray.Wpf
         /// </summary>
         private void StartupWithMockService(AppConfig config)
         {
-            var service = new StubHealthTrayService(new List<Check>
-            {
-                new Check()
-                {
-                    name = "A test check",
-                    last_ping = DateTime.Now.AddMinutes(-1.5)
-                },
-                new Check()
-                {
-                    name = "Another test check",
-                    last_ping = DateTime.Now
-                },
-                new Check()
-                {
-                    name = "Yet another test check",
-                    last_ping = DateTime.Now.AddHours(-30.5),
-                    status = CheckStatus.late
-                },
-                new Check()
-                {
-                    name = "Oh no it's down",
-                    last_ping = DateTime.Now.AddDays(-10),
-                    status = CheckStatus.down
-                },
-            });
-
+            var service = new FileBasedHealthTrayService(@"Testing\checks.json");
             var dashboard = new DashboardWindow(service, config);
             dashboard.Show();
         }

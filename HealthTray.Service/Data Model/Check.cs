@@ -24,9 +24,9 @@ namespace HealthTray.Service.Model
             return JsonConvert.SerializeObject(this, Formatting.Indented);
         }
 
-        public TimeSpan SinceLastPing(DateTime? currentTime = null)
+        public TimeSpan? SinceLastPing(DateTime? currentTime = null)
         {
-            if (last_ping == null) return TimeSpan.MaxValue;
+            if (last_ping == null) return null;
             if (currentTime == null) currentTime = DateTime.Now;
             return currentTime.Value - last_ping.Value;
         }
