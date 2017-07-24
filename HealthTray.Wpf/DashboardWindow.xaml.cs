@@ -47,6 +47,9 @@ namespace HealthTray.Wpf
             PreviewKeyUp += new KeyEventHandler(RefreshOnF5);
             PreviewKeyUp += new KeyEventHandler(ShowDashboardOnF1);
             PreviewKeyUp += new KeyEventHandler(ShowSettingsOnF2);
+#if DEBUG
+            PreviewKeyUp += new KeyEventHandler(ShowTestNotificationOnF3);
+#endif
         }
 
         /// <summary>
@@ -163,6 +166,19 @@ namespace HealthTray.Wpf
         private void ShowSettingsOnF2(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.F2) new ShowSettingsCommand().Execute(null);
+        }
+
+        /// <summary>
+        /// Keyboard handler: shows a test notification on pressing F3.
+        /// </summary>
+        private void ShowTestNotificationOnF3(object sender, KeyEventArgs e)
+        {
+            if (e.Key != Key.F3) return;
+
+            var app = Application.Current as App;
+            if (app == null) return;
+
+            app.ShowBalloonNotification(new StatusChangePopup(Icon, "Test check"));
         }
 
         /// <summary>
