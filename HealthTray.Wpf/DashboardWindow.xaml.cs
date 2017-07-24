@@ -19,6 +19,9 @@ namespace HealthTray.Wpf
         private AppConfig config;
         private DispatcherTimer refreshTimer;
 
+        private CheckStatus lastOverallStatus = CheckStatus.@new;
+        private CheckStatus currentOverallStatus = CheckStatus.@new;
+
         /// <summary>
         /// Settings page user control.
         /// </summary>
@@ -109,9 +112,17 @@ namespace HealthTray.Wpf
                     CheckPanel.Children.Add(new CheckControl(check));
                 }
 
-                var overallStatus = DetermineOverallStatus(checks);
-                Icon = CheckControl.GetIconFor(overallStatus);
+                lastOverallStatus = currentOverallStatus;
+                currentOverallStatus = DetermineOverallStatus(checks);
+
+                Icon = CheckControl.GetIconFor(currentOverallStatus);
                 ((App)Application.Current).SetTaskbarIcon(Icon);
+
+                if (currentOverallStatus != lastOverallStatus)
+                {
+                    var app = Application.Current as App;
+                    app.ShowBalloonNotification(new StatusChangePopup(Icon, "HealthTray status changed."));
+                }
             }
             catch (HttpRequestException httpEx)
             {
@@ -178,7 +189,7 @@ namespace HealthTray.Wpf
             var app = Application.Current as App;
             if (app == null) return;
 
-            app.ShowBalloonNotification(new StatusChangePopup(Icon, "Test check"));
+            app.ShowBalloonNotification(new StatusChangePopup(Icon, "Test popup"));
         }
 
         /// <summary>
