@@ -59,7 +59,7 @@ namespace HealthTray.Wpf
         /// <remarks>
         /// TODO: unit test
         /// </remarks>
-        private static string FormatForDisplay(TimeSpan? ts)
+        internal static string FormatForDisplay(TimeSpan? ts)
         {
             if (ts == null) return "never";
 

@@ -139,7 +139,7 @@ namespace HealthTray.Wpf
         /// <remarks>
         /// TODO: extract + unit test
         /// </remarks>
-        private CheckStatus DetermineOverallStatus(IList<Check> checks)
+        internal static CheckStatus DetermineOverallStatus(IList<Check> checks)
         {
             if (checks.Count == 0) return CheckStatus.@new;
             if (checks.All(c => c.status == CheckStatus.up)) return CheckStatus.up;
