@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="HealthTray Dashboard" Icon="Icons/new.ico"
         Width="640" Height="480"
-        MinWidth="320" MinHeight="320"
+        MinWidth="320" MinHeight="170"
         Background="#282828">
     <DockPanel Name="dockPanel">
         <Menu DockPanel.Dock="Top">
