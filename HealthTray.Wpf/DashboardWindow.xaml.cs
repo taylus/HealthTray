@@ -126,7 +126,9 @@ namespace HealthTray.Wpf
             }
             catch (HttpRequestException httpEx)
             {
-                MessageBox.Show(httpEx.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                refreshTimer.Stop();
+                MessageBox.Show("Error refreshing dashboard: " + httpEx.Message, "HealthTray Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                refreshTimer.Start();
             }
         }
 
