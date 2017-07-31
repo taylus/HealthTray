@@ -19,7 +19,7 @@ namespace HealthTray.Wpf
                 dashboard.Settings.Clear();
                 dashboard.Settings.LoadFromConfig();
                 dashboard.Show();
-                dashboard.Focus();
+                dashboard.Activate();
             }
         }
 
