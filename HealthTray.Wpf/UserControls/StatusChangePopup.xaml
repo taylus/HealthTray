@@ -12,7 +12,7 @@
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <Image x:Name="StatusImage" Width="28"  Height="28" VerticalAlignment="Center" Source="/Icons/new.ico" Margin="4"/>
+        <Image x:Name="StatusImage" Width="28" Height="28" RenderOptions.BitmapScalingMode="HighQuality" VerticalAlignment="Center" Source="/Icons/new.ico" Margin="4"/>
         <TextBlock x:Name="StatusText" TextWrapping="WrapWithOverflow" TextTrimming="CharacterEllipsis" Grid.Column="1" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="8,0,0,0">Status text</TextBlock>
     </Grid>
 </UserControl>
