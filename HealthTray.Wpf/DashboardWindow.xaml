@@ -18,7 +18,12 @@
             </MenuItem>
             <MenuItem Header="_Settings" InputGestureText="F2" Command="{StaticResource ShowSettingsCommand}"/>
         </Menu>
-        <Label Name="RefreshIntervalDisplay" Foreground="LightGray" DockPanel.Dock="Bottom" HorizontalAlignment="Center">Updated every xxx seconds</Label>
+        <Label Name="RefreshDisplay" Foreground="LightGray" DockPanel.Dock="Bottom" HorizontalAlignment="Center">
+            <TextBlock>
+                <Run Name="RefreshIntervalDisplay">Updated every xxx seconds</Run>
+                <Hyperlink Name="RefreshNowLink" NavigateUri="." RequestNavigate="RefreshNowLink_RequestNavigate">(refresh now)</Hyperlink>
+            </TextBlock>
+        </Label>
         <WrapPanel Name="CheckPanel" Height="Auto" Width="Auto">
         </WrapPanel>
     </DockPanel>

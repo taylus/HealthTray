@@ -3,6 +3,7 @@ using System.Windows;
 using System.Net.Http;
 using System.Windows.Input;
 using System.Windows.Threading;
+using System.Windows.Navigation;
 using System.ComponentModel;
 using System.Threading.Tasks;
 using HealthTray.Service;
@@ -81,7 +82,7 @@ namespace HealthTray.Wpf
         /// </summary>
         private void UpdateRefreshTimerDisplay(int seconds)
         {
-            RefreshIntervalDisplay.Content = string.Format(refreshIntervalFormat, seconds);
+            RefreshIntervalDisplay.Text = string.Format(refreshIntervalFormat, seconds);
         }
 
         /// <summary>
@@ -173,6 +174,15 @@ namespace HealthTray.Wpf
             if (app == null) return;
 
             app.ShowBalloonNotification(new StatusChangePopup(Icon, "Test popup"));
+        }
+
+        /// <summary>
+        /// Click handler for the "refresh now" dashboard link.
+        /// </summary>
+        private async void RefreshNowLink_RequestNavigate(object sender, RequestNavigateEventArgs e)
+        {
+            await Refresh();
+            e.Handled = true;
         }
 
         /// <summary>
