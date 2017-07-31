@@ -39,23 +39,23 @@ namespace HealthTray.Wpf.Test
         }
 
         [TestMethod]
-        public void Calculate_Late_Overall_Status_For_Late_Check_And_Lower()
+        public void Calculate_Late_Overall_Status_For_Late_Check()
         {
-            var checks = new List<Check>() { new Check() { status = CheckStatus.late }, new Check() { status = CheckStatus.paused }, new Check() { status = CheckStatus.@new } };
+            var checks = new List<Check>() { new Check() { status = CheckStatus.late }, new Check() { status = CheckStatus.paused }, new Check() { status = CheckStatus.up } };
             Assert.AreEqual(CheckStatus.late, StatusCalculator.CalculateOverallStatusFrom(checks));
         }
 
         [TestMethod]
-        public void Calculate_Paused_Overall_Status_For_Paused_Check_And_Lower()
+        public void Calculate_Paused_Overall_Status_For_Paused_Check()
         {
-            var checks = new List<Check>() { new Check() { status = CheckStatus.paused }, new Check() { status = CheckStatus.@new } };
+            var checks = new List<Check>() { new Check() { status = CheckStatus.paused }, new Check() { status = CheckStatus.up } };
             Assert.AreEqual(CheckStatus.paused, StatusCalculator.CalculateOverallStatusFrom(checks));
         }
 
         [TestMethod]
         public void Calculate_New_Overall_Status_For_New_Checks()
         {
-            var checks = new List<Check>() { new Check() { status = CheckStatus.@new }, new Check() { status = CheckStatus.@new } };
+            var checks = new List<Check>() { new Check() { status = CheckStatus.@new }, new Check() { status = CheckStatus.up } };
             Assert.AreEqual(CheckStatus.@new, StatusCalculator.CalculateOverallStatusFrom(checks));
         }
     }
