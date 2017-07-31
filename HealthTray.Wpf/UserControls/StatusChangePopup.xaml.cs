@@ -4,6 +4,9 @@ using System.Windows.Controls;
 
 namespace HealthTray.Wpf
 {
+    /// <summary>
+    /// Displays an image and a bit of text indicating a status change.
+    /// </summary>
     public partial class StatusChangePopup : UserControl
     {
         public StatusChangePopup()

@@ -9,6 +9,9 @@ using HealthTray.Security;
 
 namespace HealthTray.Wpf
 {
+    /// <summary>
+    /// Displays application settings and allows the user to edit them.
+    /// </summary>
     public partial class SettingsControl : UserControl
     {
         private AppConfig config;

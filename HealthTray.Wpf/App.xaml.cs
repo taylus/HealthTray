@@ -1,5 +1,4 @@
-﻿using System;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Media;
 using System.Windows.Controls.Primitives;
 using System.Collections.Generic;
@@ -10,6 +9,14 @@ using HealthTray.Service.Model;
 
 namespace HealthTray.Wpf
 {
+    /// <summary>
+    /// Represents the overall HealthTray application. Mainly responsible for
+    /// initial startup and system tray icon (<see cref="TaskbarIcon"/>) management.
+    /// </summary>
+    /// <remarks>
+    /// Big thanks for Philipp Sumi for developing the WPF-based NotifyIcon package!
+    /// http://www.hardcodet.net/wpf-notifyicon
+    /// </remarks>
     public partial class App : Application
     {
         private TaskbarIcon tb;

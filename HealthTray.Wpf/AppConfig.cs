@@ -4,6 +4,10 @@ using System.Configuration;
 
 namespace HealthTray.Wpf
 {
+    /// <summary>
+    /// Centralizes App.config I/O.
+    /// This application writes settings to its App.config file at runtime.
+    /// </summary>
     public class AppConfig
     {
         public Configuration Configuration { get; private set; }

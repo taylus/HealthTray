@@ -7,6 +7,9 @@ using Newtonsoft.Json.Linq;
 
 namespace HealthTray.Service
 {
+    /// <summary>
+    /// Retrieves <see cref="Check"/> objects from a JSON file.
+    /// </summary>
     public class FileBasedHealthTrayService : IHealthTrayService
     {
         public string Filename { get; private set; }

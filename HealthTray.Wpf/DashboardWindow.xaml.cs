@@ -11,6 +11,13 @@ using HealthTray.Service.Model;
 
 namespace HealthTray.Wpf
 {
+    /// <summary>
+    /// Displays zero or more "checks", which are simple indications of whether
+    /// a specific healthchecks.io URL has been visited recently.<para/>
+    /// 
+    /// Checks are retrieved through a <see cref="IHealthTrayService"/>, the
+    /// standard implementation of which calls healthchecks.io's REST API.
+    /// </summary>
     public partial class DashboardWindow : Window
     {
         const string refreshIntervalFormat = "Updated every {0} seconds";
@@ -101,7 +108,7 @@ namespace HealthTray.Wpf
         public async Task Refresh()
         {
             CheckPanel.Children.Clear();
-            //TODO: better to merge checks into existing controls based on ping url?
+            //TODO: eliminate flicker by merging checks into existing controls based on ping url
 
             try
             {

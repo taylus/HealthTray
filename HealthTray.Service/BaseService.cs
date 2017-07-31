@@ -3,6 +3,9 @@ using System.Threading.Tasks;
 
 namespace HealthTray.Service
 {
+    /// <summary>
+    /// A generic <see cref="System.Net.Http.HttpClient"/> wrapper with some common utility methods.
+    /// </summary>
     public abstract class BaseService
     {
         /// <summary>
@@ -12,7 +15,7 @@ namespace HealthTray.Service
 
         /// <summary>
         /// Sends the given request to the underlying HttpClient and returns its response.
-        /// Throws an <see cref="ExampleServiceException"/> if we get an unsuccessful response.
+        /// Throws an <see cref="HttpRequestException"/> if we get an unsuccessful response.
         /// </summary>
         protected virtual async Task<HttpResponseMessage> GetResponseAsync(HttpRequestMessage request)
         {

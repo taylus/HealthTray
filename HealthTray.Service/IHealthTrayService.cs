@@ -4,6 +4,9 @@ using HealthTray.Service.Model;
 
 namespace HealthTray.Service
 {
+    /// <summary>
+    /// Represents a type which retrieves <see cref="Check"/> objects.
+    /// </summary>
     public interface IHealthTrayService
     {
         Task<IList<Check>> GetChecks();

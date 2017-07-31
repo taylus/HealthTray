@@ -8,6 +8,9 @@ using HealthTray.Service.Model;
 
 namespace HealthTray.Service
 {
+    /// <summary>
+    /// Retrieves <see cref="Check"/> objects from the healthchecks.io REST API.
+    /// </summary>
     public class HealthTrayService : BaseService, IHealthTrayService
     {
         internal HealthTrayService(HttpClient httpClient) : this(httpClient, "http://localhost.fiddler", null) { }

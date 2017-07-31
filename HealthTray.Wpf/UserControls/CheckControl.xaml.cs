@@ -7,6 +7,9 @@ using HealthTray.Service.Model;
 
 namespace HealthTray.Wpf
 {
+    /// <summary>
+    /// Displays a single <see cref="Check"/> object. 
+    /// </summary>
     public partial class CheckControl : UserControl
     {
         private Check check;
