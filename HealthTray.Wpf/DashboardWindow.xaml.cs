@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Linq;
 using System.Windows;
 using System.Net.Http;
 using System.Windows.Input;
 using System.Windows.Threading;
 using System.ComponentModel;
 using System.Threading.Tasks;
-using System.Collections.Generic;
 using HealthTray.Service;
 using HealthTray.Service.Model;
 
@@ -113,7 +111,7 @@ namespace HealthTray.Wpf
                 }
 
                 lastOverallStatus = currentOverallStatus;
-                currentOverallStatus = DetermineOverallStatus(checks);
+                currentOverallStatus = StatusCalculator.CalculateOverallStatusFrom(checks);
 
                 Icon = CheckControl.GetIconFor(currentOverallStatus);
                 ((App)Application.Current).SetTaskbarIcon(Icon);
@@ -130,23 +128,6 @@ namespace HealthTray.Wpf
                 MessageBox.Show("Error refreshing dashboard: " + httpEx.Message, "HealthTray Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 refreshTimer.Start();
             }
-        }
-
-        /// <summary>
-        /// Determine the overall status of the dashboard based on the given checks.
-        /// E.g. it's up if everything is up, but down if anything is down, etc.
-        /// </summary>
-        /// <remarks>
-        /// TODO: extract + unit test
-        /// </remarks>
-        internal static CheckStatus DetermineOverallStatus(IList<Check> checks)
-        {
-            if (checks.Count == 0) return CheckStatus.@new;
-            if (checks.All(c => c.status == CheckStatus.up)) return CheckStatus.up;
-            if (checks.Any(c => c.status == CheckStatus.down)) return CheckStatus.down;
-            if (checks.Any(c => c.status == CheckStatus.late)) return CheckStatus.late;
-            if (checks.Any(c => c.status == CheckStatus.paused)) return CheckStatus.paused;
-            return CheckStatus.@new;
         }
 
         /// <summary>

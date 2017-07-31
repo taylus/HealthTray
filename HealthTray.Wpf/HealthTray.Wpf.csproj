@@ -67,6 +67,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="AppConfig.cs" />
+    <Compile Include="StatusCalculator.cs" />
     <Compile Include="Testing\FileBasedHealthTrayService.cs" />
     <Compile Include="UserControls\CheckControl.xaml.cs">
       <DependentUpon>CheckControl.xaml</DependentUpon>

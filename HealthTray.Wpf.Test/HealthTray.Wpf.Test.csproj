@@ -53,10 +53,15 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="StatusCalculator_Should.cs" />
     <Compile Include="CheckControl_Should.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\HealthTray.Service\HealthTray.Service.csproj">
+      <Project>{7bcb9b17-8cb7-45ad-bf49-d89b233a6b19}</Project>
+      <Name>HealthTray.Service</Name>
+    </ProjectReference>
     <ProjectReference Include="..\HealthTray.Wpf\HealthTray.Wpf.csproj">
       <Project>{40630a76-bd59-4cc8-bb9a-acf496382a7e}</Project>
       <Name>HealthTray.Wpf</Name>
