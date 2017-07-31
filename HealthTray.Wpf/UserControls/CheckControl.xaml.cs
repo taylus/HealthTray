@@ -56,9 +56,6 @@ namespace HealthTray.Wpf
         /// <summary>
         /// Returns a human-readable version of the given "check last pinged" TimeSpan.
         /// </summary>
-        /// <remarks>
-        /// TODO: unit test
-        /// </remarks>
         internal static string FormatForDisplay(TimeSpan? ts)
         {
             if (ts == null) return "never";
