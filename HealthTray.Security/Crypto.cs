@@ -50,12 +50,13 @@ namespace HealthTray.Security
         /// Generates and returns a random salt of at least the given length.
         /// The same salt that was used to encrypt a string must be used to decrypt it.
         /// </summary>
-        /// <param name="numBytes">
-        /// The number of bytes to use for the salt. It is recommended this be 16 or higher.
+        /// <param name="howManyBytes">
+        /// The number of bytes to use for the salt (recommended to be at least 16).
         /// <see>https://stackoverflow.com/questions/9619727/how-long-should-a-salt-be-to-make-it-infeasible-to-attempt-dictionary-attacks</see>
         /// </param>
         public static string GenerateSalt(int howManyBytes)
         {
+            if (howManyBytes <= 0) throw new ArgumentException("Salt must be > 0 bytes.", nameof(howManyBytes));
             byte[] saltBytes = new byte[howManyBytes];
             using (var rng = new RNGCryptoServiceProvider())
             {

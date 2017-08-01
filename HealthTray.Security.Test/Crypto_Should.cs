@@ -18,6 +18,14 @@ namespace HealthTray.Security.Test
             Assert.IsTrue(salt.Length >= length, "Salt length should be >= the specified length.");
         }
 
+        [TestMethod, ExpectedException(typeof(ArgumentException))]
+        public void Throw_An_Exception_If_Salt_Is_Of_Invalid_Size()
+        {
+            const int length = -1;
+
+            string salt = Crypto.GenerateSalt(length);
+        }
+
         [TestMethod]
         public void Decrypt_A_String_Back_To_Its_Original_Plaintext()
         {
