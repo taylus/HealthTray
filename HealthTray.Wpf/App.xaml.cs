@@ -1,5 +1,7 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Media;
+using System.Windows.Threading;
 using System.Windows.Controls.Primitives;
 using System.Collections.Generic;
 using Hardcodet.Wpf.TaskbarNotification;
@@ -20,6 +22,14 @@ namespace HealthTray.Wpf
     public partial class App : Application
     {
         private TaskbarIcon tb;
+
+        /// <summary>
+        /// Creates a new instance of this application.
+        /// </summary>
+        public App() : base()
+        {
+            Dispatcher.UnhandledException += UnhandledExceptionHandler;
+        }
 
         /// <summary>
         /// Application startup. Put global initialization logic here.
@@ -96,6 +106,18 @@ namespace HealthTray.Wpf
         public void ShowBalloonNotification(UIElement popup, PopupAnimation animation = PopupAnimation.Slide, int? timeoutMilliseconds = 4000)
         {
             tb.ShowCustomBalloon(popup, animation, timeoutMilliseconds);
+        }
+
+        /// <summary>
+        /// A global error handler for any exceptions that aren't otherwise handled.
+        /// </summary>
+        private void UnhandledExceptionHandler(object sender, DispatcherUnhandledExceptionEventArgs e)
+        {
+            var errorMsg = string.Format("Whoops. An unexpected error occurred and HealthTray must close.\n" +
+                "The error was: {0}: {1}", e.Exception.GetType(), e.Exception.Message);
+            MessageBox.Show(errorMsg, "HealthTray Fatal Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            e.Handled = true;
+            Environment.Exit(-1);
         }
     }
 }
