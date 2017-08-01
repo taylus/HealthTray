@@ -108,12 +108,10 @@ namespace HealthTray.Wpf
         /// </summary>
         public async Task Refresh()
         {
-            CheckPanel.Children.Clear();
-            //TODO: eliminate flicker by merging checks into existing controls based on ping url
-
             try
             {
                 var checks = await Service.GetChecks();
+                CheckPanel.Children.Clear();
                 foreach (var check in checks)
                 {
                     CheckPanel.Children.Add(new CheckControl(check));
