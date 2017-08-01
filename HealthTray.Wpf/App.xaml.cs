@@ -74,15 +74,23 @@ namespace HealthTray.Wpf
             if (string.IsNullOrWhiteSpace(apiUrl) || string.IsNullOrWhiteSpace(apiKeySalt))
             {
                 service = new StubHealthTrayService(new List<Check>());
-                if (MessageBox.Show("It looks like you haven't set an API key yet. Enter one now?", "First run?", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                if (MessageBox.Show("It looks like you haven't set an API URL and/or key yet. Enter one now?", "First run?", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
                 {
                     goToSettings = true;
                 }
             }
             else
             {
-                var apiKey = Crypto.Decrypt(config.Get<string>("healthchecks-api-key"), apiKeySalt);
-                service = new HealthTrayService(apiUrl, apiKey);
+                try
+                {
+                    var apiKey = Crypto.Decrypt(config.Get<string>("healthchecks-api-key"), apiKeySalt);
+                    service = new HealthTrayService(apiUrl, apiKey);
+                }
+                catch
+                {
+                    service = new StubHealthTrayService(new List<Check>());
+                    goToSettings = true; //settings page should inform user about the decryption error
+                }
             }
 
             var dashboard = new DashboardWindow(service, config);

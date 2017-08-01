@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows;
 using System.Net.Http;
+using System.Windows.Media;
 using System.Windows.Input;
 using System.Windows.Threading;
 using System.Windows.Navigation;
@@ -118,23 +119,33 @@ namespace HealthTray.Wpf
                     CheckPanel.Children.Add(new CheckControl(check));
                 }
 
-                lastOverallStatus = currentOverallStatus;
-                currentOverallStatus = StatusCalculator.CalculateOverallStatusFrom(checks);
-
-                Icon = CheckControl.GetIconFor(currentOverallStatus);
-                ((App)Application.Current).SetTaskbarIcon(Icon);
-
-                if (currentOverallStatus != lastOverallStatus)
-                {
-                    var app = Application.Current as App;
-                    app.ShowBalloonNotification(new StatusChangePopup(Icon, "HealthTray status changed."));
-                }
+                SetOverallStatus(StatusCalculator.CalculateOverallStatusFrom(checks));
             }
             catch (HttpRequestException httpEx)
             {
                 refreshTimer.Stop();
+                SetOverallStatus(CheckStatus.@new);
                 MessageBox.Show("Error refreshing dashboard: " + httpEx.Message, "HealthTray Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 refreshTimer.Start();
+            }
+        }
+
+        /// <summary>
+        /// Sets overall dashboard status to the given status.
+        /// If it changed from the last status, the user will be informed via popup.
+        /// </summary>
+        private void SetOverallStatus(CheckStatus status)
+        {
+            lastOverallStatus = currentOverallStatus;
+            currentOverallStatus = status;
+
+            Icon = CheckControl.GetIconFor(status);
+            ((App)Application.Current).SetTaskbarIcon(Icon);
+
+            if (currentOverallStatus != lastOverallStatus)
+            {
+                var app = Application.Current as App;
+                app.ShowBalloonNotification(new StatusChangePopup(Icon, "HealthTray status changed."));
             }
         }
 

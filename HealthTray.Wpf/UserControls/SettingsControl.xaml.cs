@@ -63,8 +63,8 @@ namespace HealthTray.Wpf
             }
             catch (Exception ex) when (ex is CryptographicException || ex is FormatException)
             {
-                MessageBox.Show("Something went wrong decrypting your API key. :(\n\nPlease supply a new one.\n\nThe error was: "
-                    + ex.Message, "Error decrypting API key", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Something went wrong decrypting your API key. :(\n\nCould you please supply a new one?\n\nThe error was: " +
+                    ex.GetType() + ": " + ex.Message, "HealthTray - Error Decrypting API Key", MessageBoxButton.OK, MessageBoxImage.Error);
                 apiKey.Clear();
                 apiKey.Focus();
             }
