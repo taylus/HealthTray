@@ -9,16 +9,16 @@ namespace HealthTray.Service
     /// </summary>
     public class StubHealthTrayService : IHealthTrayService
     {
-        public IList<Check> Checks { get; private set; }
+        private IList<Check> checks;
 
         public StubHealthTrayService(IList<Check> checks)
         {
-            Checks = checks;
+            this.checks = checks;
         }
 
         public Task<IList<Check>> GetChecks()
         {
-            return Task.FromResult(Checks);
+            return Task.FromResult(checks);
         }
     }
 }

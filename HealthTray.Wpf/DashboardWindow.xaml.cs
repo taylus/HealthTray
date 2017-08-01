@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Windows;
 using System.Net.Http;
-using System.Windows.Media;
 using System.Windows.Input;
 using System.Windows.Threading;
 using System.Windows.Navigation;
@@ -34,6 +33,9 @@ namespace HealthTray.Wpf
         /// </summary>
         public SettingsControl Settings { get; private set; }
 
+        /// <summary>
+        /// The service from which <see cref="Check"/> objects are retrieved for displaying. 
+        /// </summary>
         public IHealthTrayService Service { get; set; }
 
         /// <summary>
@@ -41,6 +43,9 @@ namespace HealthTray.Wpf
         /// </summary>
         public DashboardWindow(IHealthTrayService service, AppConfig config)
         {
+            if (service == null) throw new ArgumentNullException(nameof(service));
+            if (config == null) throw new ArgumentNullException(nameof(config));
+
             Service = service;
             this.config = config;
 

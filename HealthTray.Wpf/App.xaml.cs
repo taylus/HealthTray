@@ -54,7 +54,7 @@ namespace HealthTray.Wpf
         /// <summary>
         /// Start up the application using a fake Healthchecks service (for testing).
         /// </summary>
-        private void StartupWithMockService(AppConfig config)
+        private static void StartupWithMockService(AppConfig config)
         {
             var service = new FileBasedHealthTrayService(@"Testing\checks.json");
             var dashboard = new DashboardWindow(service, config);
@@ -64,7 +64,7 @@ namespace HealthTray.Wpf
         /// <summary>
         /// Start up the application using the live Healthchecks service (for release).
         /// </summary>
-        private void StartupWithLiveService(AppConfig config)
+        private static void StartupWithLiveService(AppConfig config)
         {
             var apiUrl = config.Get<string>("healthchecks-api-url");
             var apiKeySalt = config.Get<string>("healthtray-salt");

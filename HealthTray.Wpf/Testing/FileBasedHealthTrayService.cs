@@ -12,16 +12,16 @@ namespace HealthTray.Service
     /// </summary>
     public class FileBasedHealthTrayService : IHealthTrayService
     {
-        public string Filename { get; private set; }
+        public string FileName { get; private set; }
 
-        public FileBasedHealthTrayService(string filename)
+        public FileBasedHealthTrayService(string fileName)
         {
-            Filename = filename;
+            FileName = fileName;
         }
 
         public Task<IList<Check>> GetChecks()
         {
-            string fileContents = File.ReadAllText(Filename);
+            string fileContents = File.ReadAllText(FileName);
             var checksObject = JsonConvert.DeserializeObject<JObject>(fileContents);
             var checks = checksObject["checks"]?.ToObject<IList<Check>>();
             return Task.FromResult(checks);

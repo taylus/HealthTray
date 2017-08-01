@@ -8,7 +8,7 @@ namespace HealthTray.Security
     /// Provides string-based encryption/decryption routines using Microsoft's
     /// <see cref="ProtectedData"/> class and underlying Windows Data Protection API (DPAPI).
     /// </summary>
-    public class Crypto
+    public static class Crypto
     {
         /// <summary>
         /// Encrypts the given string and returns base64-encoded ciphertext.
@@ -54,11 +54,14 @@ namespace HealthTray.Security
         /// The number of bytes to use for the salt. It is recommended this be 16 or higher.
         /// <see>https://stackoverflow.com/questions/9619727/how-long-should-a-salt-be-to-make-it-infeasible-to-attempt-dictionary-attacks</see>
         /// </param>
-        public static string GenerateSalt(int numBytes)
+        public static string GenerateSalt(int howManyBytes)
         {
-            byte[] saltBytes = new byte[numBytes];
-            new RNGCryptoServiceProvider().GetNonZeroBytes(saltBytes);
-            return Convert.ToBase64String(saltBytes);
+            byte[] saltBytes = new byte[howManyBytes];
+            using (var rng = new RNGCryptoServiceProvider())
+            {
+                rng.GetNonZeroBytes(saltBytes);
+                return Convert.ToBase64String(saltBytes);
+            }
         }
     }
 }

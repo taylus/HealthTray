@@ -12,8 +12,6 @@ namespace HealthTray.Wpf
     /// </summary>
     public partial class CheckControl : UserControl
     {
-        private Check check;
-
         /// <summary>
         /// Creates a default instance of this control.
         /// </summary>
@@ -35,7 +33,7 @@ namespace HealthTray.Wpf
         /// </summary>
         public void Refresh(Check check)
         {
-            this.check = check;
+            if (check == null) throw new ArgumentNullException(nameof(check));
             checkName.Content = check.name;
             checkLastPing.Content = string.Format("Last ping: {0}", FormatForDisplay(check.SinceLastPing()));
             checkStatus.Source = GetIconFor(check.status);
