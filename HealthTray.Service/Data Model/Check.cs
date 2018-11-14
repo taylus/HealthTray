@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Runtime.Serialization;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace HealthTray.Service.Model
 {
@@ -32,10 +34,13 @@ namespace HealthTray.Service.Model
         }
     }
 
+    [DataContract]
+    [JsonConverter(typeof(StringEnumConverter))]
     public enum CheckStatus
     {
         up,
         down,
+        [EnumMember(Value = "grace")] //to serialize "late" and "grace" as late -- https://github.com/JamesNK/Newtonsoft.Json/issues/416
         late,
         @new,
         paused
