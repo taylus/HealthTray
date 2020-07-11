@@ -40,8 +40,9 @@ namespace HealthTray.Service.Model
     {
         up,
         down,
-        [EnumMember(Value = "grace")] //to serialize "late" and "grace" as late -- https://github.com/JamesNK/Newtonsoft.Json/issues/416
+        [EnumMember(Value = "grace")]       //serialize "late" and "grace" as late -- https://github.com/taylus/HealthTray/issues/1
         late,
+        [EnumMember(Value = "started")]     //serialize "started" and "new" as "new" -- https://github.com/taylus/HealthTray/issues/3
         @new,
         paused
     }
